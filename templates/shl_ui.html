@@ -439,7 +439,7 @@
   <div class="topbar-right">
     <div class="api-input-wrap">
       <label>API</label>
-      <input type="text" id="apiUrl" value="window.location.origin" placeholder="window.location.origin" />
+      <input type="text" id="apiUrl" placeholder="API URL" />
     </div>
     <button class="btn-check" onclick="checkHealth()">Check health</button>
     <div style="display:flex;align-items:center;gap:6px;">
@@ -543,7 +543,7 @@ let history = [];
 let busy    = false;
 
 function apiBase() {
-  return document.getElementById('apiUrl').value.replace(/\/+$/, '');
+  return window.location.origin;
 }
 
 /* ── HEALTH ── */
