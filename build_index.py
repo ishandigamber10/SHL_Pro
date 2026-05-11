@@ -69,7 +69,7 @@ CHROMA_DIR = Path("chroma_db")
 
 COLLECTION_NAME = "shl_assessments"
 
-EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+EMBED_MODEL = "all-MiniLM-L6-v2"
 
 # =========================================================
 # LOGGING
@@ -246,9 +246,19 @@ def build_index():
         "\n[bold cyan]Loading embedding model...[/bold cyan]"
     )
 
-    model = SentenceTransformer(
-        EMBED_MODEL
-    )
+_model = None
+
+def get_model():
+
+    global _model
+
+    if _model is None:
+
+        _model = SentenceTransformer(
+            "all-MiniLM-L6-v2"
+        )
+
+    return _model
 
     console.print(
         f"Using model: [green]{EMBED_MODEL}[/green]"
