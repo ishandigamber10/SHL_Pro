@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+chroma_db/
+.env
+*.pyc
+debug_detail.html
+catalog_test.json

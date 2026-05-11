@@ -1,0 +1,34 @@
+
+# API Framework
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+
+# Data Validation / Config
+pydantic>=2.7.0
+python-dotenv>=1.0.1
+
+# LLM Client
+groq>=0.11.0
+
+# Vector Database
+chromadb>=0.5.5
+ 
+# Embeddings
+sentence-transformers>=3.0.1
+torch>=2.3.0
+
+# Web Scraping
+playwright>=1.46.0
+beautifulsoup4>=4.12.3
+lxml>=5.2.2
+
+# Utilities
+
+numpy>=1.26.4
+requests>=2.32.3
+tqdm>=4.66.4
+
+# Optional (Useful for debugging/logging)
+rich>=13.7.1
+
+jinja2>=3.1.4
