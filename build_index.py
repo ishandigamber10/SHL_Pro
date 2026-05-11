@@ -46,7 +46,7 @@ import logging
 import shutil
 import retriever
 from pathlib import Path
-
+from chromadb.config import Settings
 import chromadb
 from chromadb.config import Settings
 from rich.console import Console
@@ -230,14 +230,13 @@ def build_index():
     # Remove existing DB
     # -----------------------------------------------------
 
-    if CHROMA_DIR.exists():
+    print("Preparing Chroma collection...")
 
-        console.print(
-            "[yellow]Existing ChromaDB found."
-            " Rebuilding clean index...[/yellow]"
-        )
-
-        shutil.rmtree(CHROMA_DIR)
+    try:
+        client.delete_collection("shl_catalog")
+        print("Deleted previous collection.")
+    except Exception:
+        print("No previous collection found.") 
 
     # -----------------------------------------------------
     # Initialize embedding model
@@ -260,20 +259,21 @@ def build_index():
     # -----------------------------------------------------
 
     client = chromadb.PersistentClient(
-        path=str(CHROMA_DIR),
+        path="chroma_db",
         settings=Settings(
-            anonymized_telemetry=False
+        anonymized_telemetry=False
         )
     )
+    try:
+        client.delete_collection("shl_assessments")
+        print("Deleted old collection.")
+    except Exception:
+        print("No previous collection found.")
 
-    collection = client.create_collection(
-        name=COLLECTION_NAME,
-        metadata={
-            "description": (
-                "SHL assessment semantic index"
-            )
-        }
+    collection = client.get_or_create_collection(
+        name="shl_assessments"
     )
+
 
     # -----------------------------------------------------
     # Prepare data

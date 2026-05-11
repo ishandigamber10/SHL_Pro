@@ -16,7 +16,7 @@ import os
 import re
 from collections import defaultdict
 from pathlib import Path
-
+from chromadb.config import Settings
 import chromadb
 from chromadb.utils.embedding_functions import (
     SentenceTransformerEmbeddingFunction,
@@ -294,7 +294,10 @@ def build_index():
     )
 
     _client = chromadb.PersistentClient(
-        path=str(CHROMA_DIR)
+        path="chroma_db",
+        settings=Settings(
+        anonymized_telemetry=False
+        )
     )
 
     try:
